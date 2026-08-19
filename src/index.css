@@ -1,0 +1,126 @@
+/* Executive Legal Case Management System (LCMS) Core Styles */
+:root {
+  --primary-navy: #0B192C;
+  --primary-gold: #C59B27;
+  --secondary-gold: #D4AF37;
+  --light-bg: #F8FAFC;
+  --dark-bg: #090D16;
+  --font-heading: 'Cinzel', 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Pulsing Real-time Live Beacon Indicator */
+.pulse-live-dot {
+  width: 9px;
+  height: 9px;
+  background-color: #10B981;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse-green 1.8s infinite;
+}
+
+@keyframes pulse-green {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+/* Legal Gold Text Gradient */
+.legal-gold-text {
+  background: linear-gradient(135deg, #F59E0B 0%, #D4AF37 50%, #9A7B1C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom Scrollbar for Legal Tables & Dialogs */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(197, 155, 39, 0.35);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(197, 155, 39, 0.65);
+}
+
+/* Ensure calendar picker icon is always visible on date inputs */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: inline-block !important;
+  opacity: 0.85 !important;
+  cursor: pointer !important;
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1 !important;
+}
+
+/* Remove ONLY default browser 'dd-mm-yyyy' placeholder text from date inputs when empty */
+input[type="date"]:invalid::-webkit-datetime-edit-year-field,
+input[type="date"]:invalid::-webkit-datetime-edit-month-field,
+input[type="date"]:invalid::-webkit-datetime-edit-day-field,
+input[type="date"]:invalid::-webkit-datetime-edit-text,
+input[type="date"][value=""]::-webkit-datetime-edit-year-field,
+input[type="date"][value=""]::-webkit-datetime-edit-month-field,
+input[type="date"][value=""]::-webkit-datetime-edit-day-field,
+input[type="date"][value=""]::-webkit-datetime-edit-text,
+input[type="date"]:not([value])::-webkit-datetime-edit-year-field,
+input[type="date"]:not([value])::-webkit-datetime-edit-month-field,
+input[type="date"]:not([value])::-webkit-datetime-edit-day-field,
+input[type="date"]:not([value])::-webkit-datetime-edit-text {
+  color: transparent !important;
+}
+
+input[type="date"]:focus::-webkit-datetime-edit-year-field,
+input[type="date"]:focus::-webkit-datetime-edit-month-field,
+input[type="date"]:focus::-webkit-datetime-edit-day-field,
+input[type="date"]:focus::-webkit-datetime-edit-text,
+input[type="date"]:valid::-webkit-datetime-edit-year-field,
+input[type="date"]:valid::-webkit-datetime-edit-month-field,
+input[type="date"]:valid::-webkit-datetime-edit-day-field,
+input[type="date"]:valid::-webkit-datetime-edit-text,
+input[type="date"][value]:not([value=""])::-webkit-datetime-edit-year-field,
+input[type="date"][value]:not([value=""])::-webkit-datetime-edit-month-field,
+input[type="date"][value]:not([value=""])::-webkit-datetime-edit-day-field,
+input[type="date"][value]:not([value=""])::-webkit-datetime-edit-text {
+  color: inherit !important;
+}
