@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../../config/api';
 import {
   Box,
   Button,
@@ -57,8 +58,8 @@ const StatesCities = () => {
   const fetchData = async () => {
     try {
       const [statesRes, citiesRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/masters/states'),
-        axios.get('http://localhost:5000/api/masters/cities'),
+        axios.get(`${API_BASE_URL}/api/masters/states`),
+        axios.get(`${API_BASE_URL}/api/masters/cities`),
       ]);
       setStates(statesRes.data);
       setCities(citiesRes.data);
@@ -106,10 +107,10 @@ const StatesCities = () => {
     const executeSubmit = async () => {
       try {
         if (editStateId) {
-          await axios.put(`http://localhost:5000/api/masters/states/${editStateId}`, { name: stateName });
+          await axios.put(`${API_BASE_URL}/api/masters/states/${editStateId}`, { name: stateName });
           triggerSnackbar('State updated successfully', 'success');
         } else {
-          await axios.post('http://localhost:5000/api/masters/states', { name: stateName });
+          await axios.post(`${API_BASE_URL}/api/masters/states`, { name: stateName });
           triggerSnackbar('State created successfully', 'success');
         }
         fetchData();
@@ -141,10 +142,10 @@ const StatesCities = () => {
       try {
         const payload = { name: cityName, stateId: selectedStateId };
         if (editCityId) {
-          await axios.put(`http://localhost:5000/api/masters/cities/${editCityId}`, payload);
+          await axios.put(`${API_BASE_URL}/api/masters/cities/${editCityId}`, payload);
           triggerSnackbar('City updated successfully', 'success');
         } else {
-          await axios.post('http://localhost:5000/api/masters/cities', payload);
+          await axios.post(`${API_BASE_URL}/api/masters/cities`, payload);
           triggerSnackbar('City created successfully', 'success');
         }
         fetchData();
@@ -175,7 +176,7 @@ const StatesCities = () => {
       message: 'Deleting this state will permanently delete all associated cities. Do you want to proceed?',
       onConfirm: async () => {
         try {
-          await axios.delete(`http://localhost:5000/api/masters/states/${id}`);
+          await axios.delete(`${API_BASE_URL}/api/masters/states/${id}`);
           triggerSnackbar('State deleted successfully', 'success');
           fetchData();
         } catch (err) {
@@ -193,7 +194,7 @@ const StatesCities = () => {
       message: 'Are you sure you want to permanently delete this city?',
       onConfirm: async () => {
         try {
-          await axios.delete(`http://localhost:5000/api/masters/cities/${id}`);
+          await axios.delete(`${API_BASE_URL}/api/masters/cities/${id}`);
           triggerSnackbar('City deleted successfully', 'success');
           fetchData();
         } catch (err) {

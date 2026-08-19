@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -41,7 +42,7 @@ const ClientHearings = () => {
 
   const fetchHearings = async () => {
     try {
-      let url = 'http://localhost:5000/api/firm/hearings?';
+      let url = `${API_BASE_URL}/api/firm/hearings?`;
       if (fromDate) url += `fromDate=${fromDate}&`;
       if (tillDate) url += `tillDate=${tillDate}&`;
 

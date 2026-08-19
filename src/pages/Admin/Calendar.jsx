@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import {
@@ -28,7 +29,7 @@ const HearingsCalendar = () => {
   useEffect(() => {
     const fetchHearings = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/firm/hearings');
+        const response = await axios.get(`${API_BASE_URL}/api/firm/hearings`);
         
         // Transform hearings database records into React Big Calendar event objects
         const formattedEvents = response.data.map((h) => {

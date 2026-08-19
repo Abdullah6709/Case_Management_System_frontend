@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../../config/api';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   Box,
@@ -91,10 +92,10 @@ const CaseForm = () => {
     const loadSelections = async () => {
       try {
         const [advocatesRes, courtsRes, judgesRes, clientsRes] = await Promise.all([
-          axios.get('http://localhost:5000/api/firm/advocates'),
-          axios.get('http://localhost:5000/api/masters/courts'),
-          axios.get('http://localhost:5000/api/masters/judges'),
-          axios.get('http://localhost:5000/api/firm/clients?limit=1000'),
+          axios.get(`${API_BASE_URL}/api/firm/advocates`),
+          axios.get(`${API_BASE_URL}/api/masters/courts`),
+          axios.get(`${API_BASE_URL}/api/masters/judges`),
+          axios.get(`${API_BASE_URL}/api/firm/clients?limit=1000`),
         ]);
 
         const advocatesList = Array.isArray(advocatesRes.data) ? advocatesRes.data : (advocatesRes.data?.advocates || []);
@@ -109,7 +110,7 @@ const CaseForm = () => {
 
         if (id) {
           // Fetch existing case details for editing
-          const caseRes = await axios.get(`http://localhost:5000/api/firm/cases/${id}`);
+          const caseRes = await axios.get(`${API_BASE_URL}/api/firm/cases/${id}`);
           const c = caseRes.data.caseDetails;
 
           setCaseNumber(c.caseNumber || '');
@@ -278,10 +279,10 @@ const CaseForm = () => {
 
     try {
       if (id) {
-        await axios.put(`http://localhost:5000/api/firm/cases/${id}`, payload);
+        await axios.put(`${API_BASE_URL}/api/firm/cases/${id}`, payload);
         navigate(`/firm/cases/${id}`);
       } else {
-        const response = await axios.post('http://localhost:5000/api/firm/cases', payload);
+        const response = await axios.post(`${API_BASE_URL}/api/firm/cases`, payload);
         navigate(`/firm/cases/${response.data.id || response.data._id}`);
       }
     } catch (err) {

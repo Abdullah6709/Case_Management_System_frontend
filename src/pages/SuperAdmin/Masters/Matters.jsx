@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../../config/api';
 import {
   Box,
   Button,
@@ -43,7 +44,7 @@ const Matters = () => {
 
   const fetchMatters = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/masters/matters');
+      const response = await axios.get(`${API_BASE_URL}/api/masters/matters`);
       setMatters(response.data);
     } catch (err) {
       console.error('Error fetching matters:', err);
@@ -85,10 +86,10 @@ const Matters = () => {
       try {
         const payload = { name, description };
         if (editId) {
-          await axios.put(`http://localhost:5000/api/masters/matters/${editId}`, payload);
+          await axios.put(`${API_BASE_URL}/api/masters/matters/${editId}`, payload);
           triggerSnackbar('Matter type updated successfully', 'success');
         } else {
-          await axios.post('http://localhost:5000/api/masters/matters', payload);
+          await axios.post(`${API_BASE_URL}/api/masters/matters`, payload);
           triggerSnackbar('Matter type created successfully', 'success');
         }
         fetchMatters();
@@ -119,7 +120,7 @@ const Matters = () => {
       message: 'Are you sure you want to permanently delete this matter type?',
       onConfirm: async () => {
         try {
-          await axios.delete(`http://localhost:5000/api/masters/matters/${id}`);
+          await axios.delete(`${API_BASE_URL}/api/masters/matters/${id}`);
           triggerSnackbar('Matter type deleted successfully', 'success');
           fetchMatters();
         } catch (err) {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import {
   Box,
   Button,
@@ -21,7 +22,7 @@ const Settings = () => {
 
   const fetchSettings = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/firm/settings');
+      const response = await axios.get(`${API_BASE_URL}/api/firm/settings`);
       setSettings(response.data);
     } catch (err) {
       console.error('Error fetching settings:', err);
@@ -46,7 +47,7 @@ const Settings = () => {
     setError('');
 
     try {
-      await axios.post('http://localhost:5000/api/firm/settings', { settings });
+      await axios.post(`${API_BASE_URL}/api/firm/settings`, { settings });
       setSuccess('System settings updated successfully!');
       fetchSettings();
     } catch (err) {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import {
   Box,
   Button,
@@ -44,7 +45,7 @@ const LawFirms = () => {
 
   const fetchFirms = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/superadmin/firms');
+      const response = await axios.get(`${API_BASE_URL}/api/superadmin/firms`);
       setFirms(response.data);
     } catch (err) {
       console.error('Error fetching client directory:', err);
@@ -103,9 +104,9 @@ const LawFirms = () => {
     try {
       const payload = { name, email, mobile, address, type, status };
       if (editId) {
-        await axios.put(`http://localhost:5000/api/superadmin/firms/${editId}`, payload);
+        await axios.put(`${API_BASE_URL}/api/superadmin/firms/${editId}`, payload);
       } else {
-        await axios.post('http://localhost:5000/api/superadmin/firms', payload);
+        await axios.post(`${API_BASE_URL}/api/superadmin/firms`, payload);
       }
       fetchFirms();
       handleClose();
@@ -117,7 +118,7 @@ const LawFirms = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this Client workspace? This will remove all associated users, clients, advocates, and cases!')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/superadmin/firms/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/superadmin/firms/${id}`);
       fetchFirms();
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to delete client workspace');

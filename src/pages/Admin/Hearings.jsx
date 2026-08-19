@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import {
   Box,
   Button,
@@ -44,13 +45,13 @@ const Hearings = () => {
 
   const fetchData = async () => {
     try {
-      let url = 'http://localhost:5000/api/firm/hearings?';
+      let url = `${API_BASE_URL}/api/firm/hearings?`;
       if (fromDate) url += `fromDate=${fromDate}&`;
       if (tillDate) url += `tillDate=${tillDate}&`;
 
       const [hearingsRes, casesRes] = await Promise.all([
         axios.get(url),
-        axios.get('http://localhost:5000/api/firm/cases?limit=200'),
+        axios.get(`${API_BASE_URL}/api/firm/cases?limit=200`),
       ]);
 
       setHearings(hearingsRes.data);
@@ -113,9 +114,9 @@ const Hearings = () => {
       };
 
       if (editId) {
-        await axios.put(`http://localhost:5000/api/firm/hearings/${editId}`, payload);
+        await axios.put(`${API_BASE_URL}/api/firm/hearings/${editId}`, payload);
       } else {
-        await axios.post('http://localhost:5000/api/firm/hearings', payload);
+        await axios.post(`${API_BASE_URL}/api/firm/hearings`, payload);
       }
       fetchData();
       handleClose();
@@ -127,7 +128,7 @@ const Hearings = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this hearing log?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/firm/hearings/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/firm/hearings/${id}`);
       fetchData();
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to delete hearing');

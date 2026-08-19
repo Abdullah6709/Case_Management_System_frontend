@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../../config/api';
 import {
   Box,
   Button,
@@ -39,8 +40,8 @@ const Judges = () => {
   const fetchData = async () => {
     try {
       const [judgesRes, courtsRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/masters/judges'),
-        axios.get('http://localhost:5000/api/masters/courts'),
+        axios.get(`${API_BASE_URL}/api/masters/judges`),
+        axios.get(`${API_BASE_URL}/api/masters/courts`),
       ]);
       setJudges(judgesRes.data);
       setCourts(courtsRes.data);
@@ -85,9 +86,9 @@ const Judges = () => {
     try {
       const payload = { judgeName, courtId, status };
       if (editId) {
-        await axios.put(`http://localhost:5000/api/masters/judges/${editId}`, payload);
+        await axios.put(`${API_BASE_URL}/api/masters/judges/${editId}`, payload);
       } else {
-        await axios.post('http://localhost:5000/api/masters/judges', payload);
+        await axios.post(`${API_BASE_URL}/api/masters/judges`, payload);
       }
       fetchData();
       handleClose();
@@ -99,7 +100,7 @@ const Judges = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this judge? All associated cases will remain but judge field will need update.')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/masters/judges/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/masters/judges/${id}`);
       fetchData();
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to delete judge');

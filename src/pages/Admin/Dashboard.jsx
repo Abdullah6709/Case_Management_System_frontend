@@ -30,6 +30,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 import StatCard from '../../components/Common/StatCard.jsx';
 import LoadingScreen from '../../components/Common/LoadingScreen.jsx';
+import { API_BASE_URL } from '../../config/api';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/firm/dashboard');
+        const response = await axios.get(`${API_BASE_URL}/api/firm/dashboard`);
         setData(response.data);
       } catch (error) {
         console.error('Error fetching dashboard statistics:', error);

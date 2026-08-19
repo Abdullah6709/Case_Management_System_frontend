@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import {
   Box,
   Drawer,
@@ -111,7 +112,7 @@ const DashboardLayout = () => {
 
   const fetchUpcomingHearings = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/firm/hearings');
+      const res = await axios.get(`${API_BASE_URL}/api/firm/hearings`);
       const data = res.data || [];
       const today = new Date();
       today.setHours(0, 0, 0, 0);

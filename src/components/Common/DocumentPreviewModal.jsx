@@ -21,12 +21,14 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 
+import { API_BASE_URL } from '../../config/api';
+
 const getCleanFileUrl = (url) => {
   if (!url) return '';
   if (url.startsWith('http://') || url.startsWith('https://')) return url;
   const clean = url.replace(/\\/g, '/');
   const pathStr = clean.startsWith('/') ? clean : '/' + clean;
-  return `http://localhost:5000${pathStr}`;
+  return `${API_BASE_URL}${pathStr}`;
 };
 
 export const DocumentPreviewModal = ({ open, onClose, document: docItem }) => {
@@ -67,7 +69,7 @@ export const DocumentPreviewModal = ({ open, onClose, document: docItem }) => {
     // 1. FIRST PRIORITY: JSON Preview Data endpoint (Immunized against IDM interception)
     if (docId) {
       try {
-        const jsonUrl = `http://localhost:5000/api/firm/documents/${docId}/preview-data`;
+        const jsonUrl = `${API_BASE_URL}/api/firm/documents/${docId}/preview-data`;
         const res = await axios.get(jsonUrl, { headers });
         if (res.data && res.data.base64) {
           const mimeType = res.data.mimeType || (isImage ? 'image/jpeg' : 'application/pdf');
@@ -95,7 +97,7 @@ export const DocumentPreviewModal = ({ open, onClose, document: docItem }) => {
     // 2. SECOND PRIORITY: Direct file blob stream
     if (docId) {
       try {
-        const streamUrl = `http://localhost:5000/api/firm/documents/${docId}/file`;
+        const streamUrl = `${API_BASE_URL}/api/firm/documents/${docId}/file`;
         const res = await axios.get(streamUrl, {
           headers,
           responseType: 'blob',
@@ -168,7 +170,7 @@ export const DocumentPreviewModal = ({ open, onClose, document: docItem }) => {
       const token = localStorage.getItem('token');
       const tokenParam = token ? `?token=${encodeURIComponent(token)}` : '';
       const targetUrl = docId
-        ? `http://localhost:5000/api/firm/documents/${docId}/file${tokenParam}`
+        ? `${API_BASE_URL}/api/firm/documents/${docId}/file${tokenParam}`
         : fullUrl;
       const link = document.createElement('a');
       link.href = targetUrl;
@@ -189,7 +191,7 @@ export const DocumentPreviewModal = ({ open, onClose, document: docItem }) => {
       const token = localStorage.getItem('token');
       const tokenParam = token ? `?token=${encodeURIComponent(token)}` : '';
       const targetUrl = docId
-        ? `http://localhost:5000/api/firm/documents/${docId}/file${tokenParam}`
+        ? `${API_BASE_URL}/api/firm/documents/${docId}/file${tokenParam}`
         : fullUrl;
       window.open(targetUrl, '_blank', 'noopener,noreferrer');
     }

@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useSearchParams, Link as RouterLink } from 'react-router-dom';
+import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import {
   Box,
   Card,
@@ -9,27 +11,27 @@ import {
   Typography,
   Alert,
   CircularProgress,
+  InputAdornment,
+  IconButton,
+  Container,
 } from '@mui/material';
-import ScaleIcon from '@mui/icons-material/Scale';
-import axios from 'axios';
+import LockResetIcon from '@mui/icons-material/LockReset';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 const ResetPassword = () => {
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [token, setToken] = useState('');
+  const token = searchParams.get('token') || '';
+  const navigate = useNavigate();
+
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-
-  useEffect(() => {
-    const tok = searchParams.get('token');
-    if (tok) {
-      setToken(tok);
-    }
-  }, [searchParams]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,7 +53,7 @@ const ResetPassword = () => {
     setSuccess(null);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/reset-password', {
+      const response = await axios.post(`${API_BASE_URL}/api/auth/reset-password`, {
         token,
         newPassword,
       });

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import { useNavigate } from 'react-router-dom';
 import {
   Grid,
@@ -34,7 +35,7 @@ const ClientDashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/firm/dashboard');
+      const response = await axios.get(`${API_BASE_URL}/api/firm/dashboard`);
       setData(response.data);
     } catch (err) {
       console.error('Error loading client case center dashboard:', err);

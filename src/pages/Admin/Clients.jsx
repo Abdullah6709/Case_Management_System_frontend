@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
@@ -105,7 +106,7 @@ const Clients = () => {
 
   const fetchClients = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/firm/clients?limit=100');
+      const response = await axios.get(`${API_BASE_URL}/api/firm/clients?limit=100`);
       setClients(response.data.clients || []);
     } catch (err) {
       console.error('Error fetching clients:', err);
@@ -141,7 +142,7 @@ const Clients = () => {
       if (readOnly) {
         setLoadingDetails(true);
         try {
-          const res = await axios.get(`http://localhost:5000/api/firm/clients/${client.id}`);
+          const res = await axios.get(`${API_BASE_URL}/api/firm/clients/${client.id}`);
           setDetailedClient(res.data);
         } catch (err) {
           console.error('Error fetching client details:', err);
@@ -177,7 +178,7 @@ const Clients = () => {
   const handleCasesOpen = async (client) => {
     setSelectedClient(client);
     try {
-      const res = await axios.get(`http://localhost:5000/api/firm/clients/${client.id}`);
+      const res = await axios.get(`${API_BASE_URL}/api/firm/clients/${client.id}`);
       setClientCases(res.data.cases || []);
       setCasesOpen(true);
     } catch (err) {
@@ -192,10 +193,10 @@ const Clients = () => {
       message: 'Are you sure you want to permanently delete this case record?',
       onConfirm: async () => {
         try {
-          await axios.delete(`http://localhost:5000/api/firm/cases/${caseId}`);
+          await axios.delete(`${API_BASE_URL}/api/firm/cases/${caseId}`);
           triggerSnackbar('Case deleted successfully', 'success');
           // Refresh cases list
-          const res = await axios.get(`http://localhost:5000/api/firm/clients/${selectedClient.id}`);
+          const res = await axios.get(`${API_BASE_URL}/api/firm/clients/${selectedClient.id}`);
           setClientCases(res.data.cases || []);
         } catch (err) {
           const errMsg = err.response?.data?.message || 'Failed to delete case';
@@ -221,10 +222,10 @@ const Clients = () => {
         };
 
         if (editId) {
-          await axios.put(`http://localhost:5000/api/firm/clients/${editId}`, payload);
+          await axios.put(`${API_BASE_URL}/api/firm/clients/${editId}`, payload);
           triggerSnackbar('Client profile updated successfully', 'success');
         } else {
-          await axios.post('http://localhost:5000/api/firm/clients', payload);
+          await axios.post(`${API_BASE_URL}/api/firm/clients`, payload);
           triggerSnackbar('Client profile created successfully', 'success');
         }
         fetchClients();
@@ -255,7 +256,7 @@ const Clients = () => {
       message: 'Are you sure you want to delete this client? This will delete their system login account too.',
       onConfirm: async () => {
         try {
-          await axios.delete(`http://localhost:5000/api/firm/clients/${id}`);
+          await axios.delete(`${API_BASE_URL}/api/firm/clients/${id}`);
           triggerSnackbar('Client profile deleted successfully', 'success');
           fetchClients();
         } catch (err) {
@@ -288,7 +289,7 @@ const Clients = () => {
       try {
         if (hearingDate && hearingPurpose) {
           // Schedule next hearing
-          await axios.post('http://localhost:5000/api/firm/hearings', {
+          await axios.post(`${API_BASE_URL}/api/firm/hearings`, {
             caseId: activeCase.id,
             hearingDate,
             hearingTime: hearingTime || '10:00',
@@ -298,7 +299,7 @@ const Clients = () => {
         }
         // Update status
         if (caseStatus !== activeCase.status) {
-          await axios.put(`http://localhost:5000/api/firm/cases/${activeCase.id}`, {
+          await axios.put(`${API_BASE_URL}/api/firm/cases/${activeCase.id}`, {
             ...activeCase,
             status: caseStatus
           });
@@ -306,7 +307,7 @@ const Clients = () => {
         triggerSnackbar('Case updated successfully', 'success');
         setNewUpdateOpen(false);
         // Refresh cases list
-        const res = await axios.get(`http://localhost:5000/api/firm/clients/${selectedClient.id}`);
+        const res = await axios.get(`${API_BASE_URL}/api/firm/clients/${selectedClient.id}`);
         setClientCases(res.data.cases || []);
       } catch (err) {
         const errMsg = err.response?.data?.message || 'Error updating case';

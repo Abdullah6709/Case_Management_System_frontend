@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import {
   Box,
   Button,
@@ -34,7 +35,7 @@ const TenantUsers = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/firm/users');
+      const response = await axios.get(`${API_BASE_URL}/api/firm/users`);
       setUsers(response.data);
     } catch (err) {
       console.error('Error fetching tenant users:', err);
@@ -76,13 +77,13 @@ const TenantUsers = () => {
 
     try {
       if (editId) {
-        await axios.put(`http://localhost:5000/api/firm/users/${editId}`, {
+        await axios.put(`${API_BASE_URL}/api/firm/users/${editId}`, {
           email,
           password: password || undefined,
           status,
         });
       } else {
-        await axios.post('http://localhost:5000/api/firm/users', {
+        await axios.post(`${API_BASE_URL}/api/firm/users`, {
           email,
           password,
           status,
@@ -98,7 +99,7 @@ const TenantUsers = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this staff user account? they will lose system login access.')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/firm/users/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/firm/users/${id}`);
       fetchUsers();
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to delete user account');

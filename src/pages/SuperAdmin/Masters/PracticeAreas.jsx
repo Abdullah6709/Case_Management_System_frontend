@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../../config/api';
 import {
   Box,
   Button,
@@ -32,7 +33,7 @@ const PracticeAreas = () => {
 
   const fetchAreas = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/masters/practice-areas');
+      const response = await axios.get(`${API_BASE_URL}/api/masters/practice-areas`);
       setAreas(response.data);
     } catch (err) {
       console.error('Error fetching practice areas:', err);
@@ -73,9 +74,9 @@ const PracticeAreas = () => {
     try {
       const payload = { name, description };
       if (editId) {
-        await axios.put(`http://localhost:5000/api/masters/practice-areas/${editId}`, payload);
+        await axios.put(`${API_BASE_URL}/api/masters/practice-areas/${editId}`, payload);
       } else {
-        await axios.post('http://localhost:5000/api/masters/practice-areas', payload);
+        await axios.post(`${API_BASE_URL}/api/masters/practice-areas`, payload);
       }
       fetchAreas();
       handleClose();
@@ -87,7 +88,7 @@ const PracticeAreas = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this Practice Area? Advocates using this area will need to be re-assigned.')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/masters/practice-areas/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/masters/practice-areas/${id}`);
       fetchAreas();
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to delete practice area');

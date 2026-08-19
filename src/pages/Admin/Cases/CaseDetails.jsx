@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../../config/api';
 import { useParams, useNavigate, Link as RouterLink } from 'react-router-dom';
 import {
   Box,
@@ -84,7 +85,7 @@ const CaseDetails = () => {
 
   const loadCaseDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/firm/cases/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/api/firm/cases/${id}`);
       setCaseDetails(response.data.caseDetails);
       setTimeline(response.data.timeline);
     } catch (err) {
@@ -113,7 +114,7 @@ const CaseDetails = () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/api/firm/hearings', {
+      await axios.post(`${API_BASE_URL}/api/firm/hearings`, {
         caseId: id,
         hearingDate,
         hearingTime,
@@ -142,7 +143,7 @@ const CaseDetails = () => {
   const handleUpdateHearingSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/firm/hearings/${selectedHearing.id}`, {
+      await axios.put(`${API_BASE_URL}/api/firm/hearings/${selectedHearing.id}`, {
         result: hearingResult,
         nextHearingDate: nextHearingDate || null,
         status: hearingStatus,
@@ -158,7 +159,7 @@ const CaseDetails = () => {
   const handleDeleteHearing = async (hearingId) => {
     if (!window.confirm('Delete this hearing schedule?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/firm/hearings/${hearingId}`);
+      await axios.delete(`${API_BASE_URL}/api/firm/hearings/${hearingId}`);
       loadCaseDetails();
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to delete hearing');
@@ -186,7 +187,7 @@ const CaseDetails = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/firm/documents', formData, {
+      await axios.post(`${API_BASE_URL}/api/firm/documents`, formData, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
       setUploadOpen(false);
@@ -202,7 +203,7 @@ const CaseDetails = () => {
     if (url.startsWith('http://') || url.startsWith('https://')) return url;
     const clean = url.replace(/\\/g, '/');
     const pathStr = clean.startsWith('/') ? clean : '/' + clean;
-    return `http://localhost:5000${pathStr}`;
+    return `${API_BASE_URL}${pathStr}`;
   };
 
   const handleDownloadDoc = (docItem) => {
@@ -225,7 +226,7 @@ const CaseDetails = () => {
   const handleDeleteDocument = async (docId) => {
     if (!window.confirm('Are you sure you want to delete this document from the vault?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/firm/documents/${docId}`);
+      await axios.delete(`${API_BASE_URL}/api/firm/documents/${docId}`);
       loadCaseDetails();
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to delete document');
@@ -235,7 +236,7 @@ const CaseDetails = () => {
   const handleDeleteCase = async () => {
     if (!window.confirm('Are you sure you want to permanently delete this entire case file? All hearings and documents will be erased.')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/firm/cases/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/firm/cases/${id}`);
       navigate('/firm/cases');
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to delete case');

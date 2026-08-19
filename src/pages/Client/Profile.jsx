@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import {
   Box,
   Button,
@@ -71,7 +72,7 @@ const ClientProfile = () => {
 
   const fetchProfile = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/auth/me');
+      const response = await axios.get(`${API_BASE_URL}/api/auth/me`);
       const u = response.data;
       const p = response.data.profile;
 
@@ -143,7 +144,7 @@ const ClientProfile = () => {
         payload.password = newPassword;
       }
 
-      await axios.put('http://localhost:5000/api/auth/profile', payload);
+      await axios.put(`${API_BASE_URL}/api/auth/profile`, payload);
       showSnackbar('Profile settings updated successfully!', 'success');
       setNewPassword('');
       setConfirmPassword('');

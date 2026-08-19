@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import {
   Box,
   Button,
@@ -33,7 +34,7 @@ const Reports = () => {
   const fetchReportData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5000/api/firm/reports?type=${reportType}`);
+      const response = await axios.get(`${API_BASE_URL}/api/firm/reports?type=${reportType}`);
       setData(response.data);
     } catch (err) {
       console.error('Error loading report:', err);

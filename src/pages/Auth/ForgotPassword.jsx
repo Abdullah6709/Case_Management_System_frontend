@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import {
   Box,
   Card,
@@ -31,7 +32,7 @@ const ForgotPassword = () => {
     setRetrievedToken('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/forgot-password', { email });
+      const response = await axios.post(`${API_BASE_URL}/api/auth/forgot-password`, { email });
       setSuccess(response.data.message);
       // In development mode, retrieve the reset token from response
       if (response.data.resetToken) {

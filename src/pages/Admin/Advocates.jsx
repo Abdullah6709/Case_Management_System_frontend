@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import {
   Box,
   Button,
@@ -43,8 +44,8 @@ const Advocates = () => {
   const fetchData = async () => {
     try {
       const [advRes, paRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/firm/advocates'),
-        axios.get('http://localhost:5000/api/masters/practice-areas'),
+        axios.get(`${API_BASE_URL}/api/firm/advocates`),
+        axios.get(`${API_BASE_URL}/api/masters/practice-areas`),
       ]);
       setAdvocates(advRes.data);
       setPracticeAreas(paRes.data);
@@ -105,9 +106,9 @@ const Advocates = () => {
       };
 
       if (editId) {
-        await axios.put(`http://localhost:5000/api/firm/advocates/${editId}`, payload);
+        await axios.put(`${API_BASE_URL}/api/firm/advocates/${editId}`, payload);
       } else {
-        await axios.post('http://localhost:5000/api/firm/advocates', payload);
+        await axios.post(`${API_BASE_URL}/api/firm/advocates`, payload);
       }
       fetchData();
       handleClose();
@@ -119,7 +120,7 @@ const Advocates = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this advocate record?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/firm/advocates/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/firm/advocates/${id}`);
       fetchData();
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to delete advocate');

@@ -24,6 +24,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LoadingScreen from '../../components/Common/LoadingScreen.jsx';
 import DocumentPreviewModal from '../../components/Common/DocumentPreviewModal.jsx';
+import { API_BASE_URL } from '../../config/api';
 
 const ClientCaseDetails = () => {
   const { id } = useParams();
@@ -41,7 +42,7 @@ const ClientCaseDetails = () => {
   useEffect(() => {
     const loadCaseDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/firm/cases/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/api/firm/cases/${id}`);
         setCaseDetails(response.data.caseDetails);
         setTimeline(response.data.timeline);
       } catch (err) {

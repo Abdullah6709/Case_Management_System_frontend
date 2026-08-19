@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../../config/api';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -20,7 +21,7 @@ const CaseList = () => {
 
   const fetchCases = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/firm/cases?limit=200');
+      const response = await axios.get(`${API_BASE_URL}/api/firm/cases?limit=200`);
       setCases(response.data.cases);
     } catch (err) {
       console.error('Error fetching cases:', err);
@@ -36,7 +37,7 @@ const CaseList = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this case file?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/firm/cases/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/firm/cases/${id}`);
       fetchCases();
     } catch (err) {
       console.error('Error deleting case:', err);

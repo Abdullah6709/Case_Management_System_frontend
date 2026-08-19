@@ -57,6 +57,7 @@ ChartJS.register(
 );
 
 import { useSelector } from 'react-redux';
+import { API_BASE_URL } from '../../config/api';
 import StatCard from '../../components/Common/StatCard.jsx';
 import LoadingScreen from '../../components/Common/LoadingScreen.jsx';
 
@@ -72,8 +73,8 @@ const SuperAdminDashboard = () => {
     const fetchData = async () => {
       try {
         const [statsRes, logsRes] = await Promise.all([
-          axios.get('http://localhost:5000/api/superadmin/dashboard-stats'),
-          axios.get('http://localhost:5000/api/superadmin/activity-logs'),
+          axios.get(`${API_BASE_URL}/api/superadmin/dashboard-stats`),
+          axios.get(`${API_BASE_URL}/api/superadmin/activity-logs`),
         ]);
         setStats(statsRes.data);
         setLogs(logsRes.data);

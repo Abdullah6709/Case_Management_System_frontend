@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import { Box, Typography } from '@mui/material';
 
 import DataTable from '../../components/Common/DataTable.jsx';
@@ -12,7 +13,7 @@ const ActivityLogs = () => {
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/superadmin/activity-logs');
+        const response = await axios.get(`${API_BASE_URL}/api/superadmin/activity-logs`);
         setLogs(response.data);
       } catch (err) {
         console.error('Error fetching activity logs:', err);

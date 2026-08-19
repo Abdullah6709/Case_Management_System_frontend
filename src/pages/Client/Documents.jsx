@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import {
   Box,
   Typography,
@@ -74,8 +75,8 @@ const ClientDocuments = () => {
   const fetchData = async () => {
     try {
       const [docsRes, casesRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/firm/documents'),
-        axios.get('http://localhost:5000/api/firm/cases?limit=200'),
+        axios.get(`${API_BASE_URL}/api/firm/documents`),
+        axios.get(`${API_BASE_URL}/api/firm/cases?limit=200`),
       ]);
 
       const casesData = casesRes.data.cases || [];
@@ -101,7 +102,7 @@ const ClientDocuments = () => {
     if (url.startsWith('http://') || url.startsWith('https://')) return url;
     const clean = url.replace(/\\/g, '/');
     const pathStr = clean.startsWith('/') ? clean : '/' + clean;
-    return `http://localhost:5000${pathStr}`;
+    return `${API_BASE_URL}${pathStr}`;
   };
 
   const handleDownloadDoc = (docItem) => {
@@ -154,7 +155,7 @@ const ClientDocuments = () => {
       formData.append('file', uploadFile);
 
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/firm/documents', formData, {
+      await axios.post(`${API_BASE_URL}/api/firm/documents`, formData, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
 
@@ -200,7 +201,7 @@ const ClientDocuments = () => {
       }
 
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:5000/api/firm/documents/${editingDoc.id || editingDoc._id}`, formData, {
+      await axios.put(`${API_BASE_URL}/api/firm/documents/${editingDoc.id || editingDoc._id}`, formData, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
 
@@ -221,7 +222,7 @@ const ClientDocuments = () => {
     if (!window.confirm('Are you sure you want to delete this document from your vault?')) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/firm/documents/${id}`, {
+      await axios.delete(`${API_BASE_URL}/api/firm/documents/${id}`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
       setSnackbar({ open: true, message: 'Document deleted successfully', severity: 'info' });
