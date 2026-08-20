@@ -1,6 +1,15 @@
 // Centralized API Configuration for Frontend
-// Default local backend API URL: http://localhost:5000
-export const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, '');
+// Fallback to the live Render backend in production, or localhost in local development
+const getApiBaseUrl = () => {
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+  const isLocal = typeof window !== 'undefined' && 
+    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+  return isLocal ? 'http://localhost:5000' : 'https://case-management-system-backend-s9ko.onrender.com';
+};
+
+export const API_BASE_URL = getApiBaseUrl().replace(/\/$/, '');
 
 export const API_ENDPOINTS = {
   BASE: API_BASE_URL,
