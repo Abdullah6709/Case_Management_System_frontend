@@ -319,14 +319,14 @@ const CaseForm = () => {
         <Grid container spacing={4}>
 
           {/* Section 1: Basic Information */}
-          <Grid size={{ xs: 12 }} >
+          <Grid item xs={12} >
             <Card>
               <CardContent sx={{ p: 4 }}>
                 <Typography variant="h6" sx={{ mb: 2.5, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 1 }}>
                   <InfoIcon color="primary" /> Basic Information
                 </Typography>
                 <Grid container spacing={2.5}>
-                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                  <Grid item xs={12} sm={6} md={3}>
                     <TextField
                       label="Case Number"
                       required
@@ -337,7 +337,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                  <Grid item xs={12} sm={6} md={3}>
                     <TextField
                       label="Filing Number"
                       required
@@ -348,7 +348,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 12, md: 6 }}>
+                  <Grid item xs={12} sm={12} md={6}>
                     <TextField
                       label="Case Title"
                       required
@@ -359,7 +359,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                  <Grid item xs={12} sm={6} md={3}>
                     <TextField
                       label="Case Type"
                       required
@@ -370,7 +370,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                  <Grid item xs={12} sm={6} md={3}>
                     <TextField
                       label="Case Category"
                       required
@@ -381,7 +381,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                  <Grid item xs={12} sm={6} md={3}>
                     <TextField
                       label="Filing Date"
                       type="date"
@@ -393,7 +393,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                  <Grid item xs={12} sm={6} md={3}>
                     <TextField
                       label="Start Date"
                       type="date"
@@ -410,7 +410,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <TextField
                       select
                       label="Priority"
@@ -424,7 +424,7 @@ const CaseForm = () => {
                     </TextField>
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <TextField
                       select
                       label="Status"
@@ -443,7 +443,7 @@ const CaseForm = () => {
           </Grid>
 
           {/* Section 2: Our Party Details */}
-          <Grid size={{ xs: 12, md: 6 }}>
+          <Grid item xs={12} md={6}>
             <Card sx={{ height: '100%' }}>
               <CardContent sx={{ p: 4 }}>
                 <Typography variant="h6" sx={{ mb: 2.5, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -451,7 +451,7 @@ const CaseForm = () => {
                 </Typography>
 
                 <Grid container spacing={2}>
-                  <Grid size={{ xs: 12 }}>
+                  <Grid item xs={12}>
                     <TextField
                       select
                       label="Select Client"
@@ -483,7 +483,7 @@ const CaseForm = () => {
                     </TextField>
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 8 }}>
+                  <Grid item xs={12} sm={8}>
                     <TextField
                       label="Associated Legal Client"
                       fullWidth
@@ -496,7 +496,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 4 }}>
+                  <Grid item xs={12} sm={4}>
                     <TextField
                       select
                       label="Party Role"
@@ -513,7 +513,7 @@ const CaseForm = () => {
                     </TextField>
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       label="Our Party Phone No"
                       fullWidth
@@ -522,7 +522,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       label="Our Party Alt Phone"
                       fullWidth
@@ -531,7 +531,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12 }}>
+                  <Grid item xs={12}>
                     <TextField
                       label="Our Party Email"
                       type="email"
@@ -541,7 +541,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12 }}>
+                  <Grid item xs={12}>
                     <TextField
                       label="Our Party Address"
                       fullWidth
@@ -552,7 +552,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12 }}>
+                  <Grid item xs={12}>
                     <TextField
                       label="Our Party Remark"
                       fullWidth
@@ -569,7 +569,7 @@ const CaseForm = () => {
           </Grid>
 
           {/* Section 3: Opposite Party Details */}
-          <Grid size={{ xs: 12, md: 6 }}>
+          <Grid item xs={12} md={6}>
             <Card sx={{ height: '100%' }}>
               <CardContent sx={{ p: 4 }}>
                 <Typography variant="h6" sx={{ mb: 2.5, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -577,7 +577,7 @@ const CaseForm = () => {
                 </Typography>
 
                 <Grid container spacing={2}>
-                  <Grid size={{ xs: 12, sm: 8 }}>
+                  <Grid item xs={12} sm={8}>
                     <TextField
                       label="Associated Legal Client"
                       fullWidth
@@ -590,7 +590,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 4 }}>
+                  <Grid item xs={12} sm={4}>
                     <TextField
                       select
                       label="Party Role"
@@ -607,7 +607,7 @@ const CaseForm = () => {
                     </TextField>
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       label="Opp Party Phone No"
                       fullWidth
@@ -616,7 +616,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       label="Opp Party Alt Phone"
                       fullWidth
@@ -625,7 +625,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12 }}>
+                  <Grid item xs={12}>
                     <TextField
                       label="Opp Party Email"
                       type="email"
@@ -635,7 +635,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12 }}>
+                  <Grid item xs={12}>
                     <TextField
                       label="Opp Party Address"
                       fullWidth
@@ -646,7 +646,7 @@ const CaseForm = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12 }}>
+                  <Grid item xs={12}>
                     <TextField
                       label="Opp Party Remark"
                       fullWidth
@@ -663,14 +663,14 @@ const CaseForm = () => {
           </Grid>
 
           {/* Section 4: Opposing Advocate Information */}
-          <Grid size={{ xs: 12 }}>
+          <Grid item xs={12}>
             <Card>
               <CardContent sx={{ p: 4 }}>
                 <Typography variant="h6" sx={{ mb: 2.5, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 1 }}>
                   <GavelIcon color="primary" /> Opposing Advocate Information
                 </Typography>
                 <Grid container spacing={2.5}>
-                  <Grid size={{ xs: 12, sm: 4 }}>
+                  <Grid item xs={12} sm={4}>
                     <TextField
                       label="Opposing Counsel Name"
                       fullWidth
@@ -678,7 +678,7 @@ const CaseForm = () => {
                       onChange={(e) => setOppositeAdvocateName(e.target.value)}
                     />
                   </Grid>
-                  <Grid size={{ xs: 12, sm: 4 }}>
+                  <Grid item xs={12} sm={4}>
                     <TextField
                       label="Enrollment Number"
                       fullWidth
@@ -686,7 +686,7 @@ const CaseForm = () => {
                       onChange={(e) => setOppositeAdvocateEnrollment(e.target.value)}
                     />
                   </Grid>
-                  <Grid size={{ xs: 12, sm: 4 }}>
+                  <Grid item xs={12} sm={4}>
                     <TextField
                       label="Opposing Firm / Chamber"
                       fullWidth
@@ -694,7 +694,7 @@ const CaseForm = () => {
                       onChange={(e) => setOppositeAdvocateFirm(e.target.value)}
                     />
                   </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       label="Mobile Number"
                       fullWidth
@@ -702,7 +702,7 @@ const CaseForm = () => {
                       onChange={(e) => setOppositeAdvocateMobile(e.target.value)}
                     />
                   </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       label="Email Address"
                       type="email"
@@ -717,14 +717,14 @@ const CaseForm = () => {
           </Grid>
 
           {/* Section 5: Court Room & Counsel Assignment */}
-          <Grid size={{ xs: 12 }}>
+          <Grid item xs={12}>
             <Card>
               <CardContent sx={{ p: 4 }}>
                 <Typography variant="h6" sx={{ mb: 2.5, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 1 }}>
                   <GavelIcon color="primary" /> Court & Assigned Advocates
                 </Typography>
                 <Grid container spacing={2.5}>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       select
                       label="Select Court Room"
@@ -740,7 +740,7 @@ const CaseForm = () => {
                       ))}
                     </TextField>
                   </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       select
                       label="Select Presiding Judge"
@@ -758,7 +758,7 @@ const CaseForm = () => {
                     </TextField>
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       select
                       label="Assigned Lead Advocate"
@@ -782,7 +782,7 @@ const CaseForm = () => {
                       )}
                     </TextField>
                   </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       select
                       label="Assigned Junior Advocate (Optional)"
@@ -806,14 +806,14 @@ const CaseForm = () => {
           </Grid>
 
           {/* Section 6: Notes & Observations */}
-          <Grid size={{ xs: 12 }}>
+          <Grid item xs={12}>
             <Card>
               <CardContent sx={{ p: 4 }}>
                 <Typography variant="h6" sx={{ mb: 2.5, fontWeight: 700 }}>
                   Case Notes & Remarks
                 </Typography>
                 <Grid container spacing={2.5}>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       label="Internal Notes (Firm eyes only)"
                       fullWidth
@@ -823,7 +823,7 @@ const CaseForm = () => {
                       onChange={(e) => setInternalNotes(e.target.value)}
                     />
                   </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       label="Public Notes (Shared with Client)"
                       fullWidth
@@ -833,7 +833,7 @@ const CaseForm = () => {
                       onChange={(e) => setPublicNotes(e.target.value)}
                     />
                   </Grid>
-                  <Grid size={{ xs: 12 }}>
+                  <Grid item xs={12}>
                     <TextField
                       label="Remarks / Summary"
                       fullWidth
@@ -849,7 +849,7 @@ const CaseForm = () => {
           </Grid>
 
           {/* Action Buttons */}
-          <Grid size={{ xs: 12 }} sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
+          <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
             <Button size="large" variant="outlined" onClick={() => navigate(-1)}>
               Cancel
             </Button>

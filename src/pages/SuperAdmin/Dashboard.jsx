@@ -259,7 +259,7 @@ const SuperAdminDashboard = () => {
       {/* Metric Cards aligned with Role Hierarchy */}
       <Grid container spacing={2.5} sx={{ mb: 4 }}>
         {!isSkitAdmin && (
-          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <Grid item xs={12} sm={6} md={3}>
             <StatCard
               title="SKIT Admins"
               value={stats?.totalSkitAdmins || 0}
@@ -270,7 +270,7 @@ const SuperAdminDashboard = () => {
           </Grid>
         )}
 
-        <Grid size={{ xs: 12, sm: 6, md: isSkitAdmin ? 3 : 3 }}>
+        <Grid item xs={12} sm={6} md={isSkitAdmin ? 3 : 3}>
           <StatCard
             title={isSkitAdmin ? 'Assigned Client Admins' : 'Client Admins'}
             value={stats?.totalClientAdmins || 0}
@@ -280,7 +280,7 @@ const SuperAdminDashboard = () => {
           />
         </Grid>
 
-        {/* <Grid size={{ xs: 12, sm: 6, md: isSkitAdmin ? 3 : 2.4 }}>
+        {/* <Grid item xs={12} sm={6} md={isSkitAdmin ? 3 : 2.4}>
           <StatCard
             title="Managed Clients"
             value={stats?.totalClients || 0}
@@ -290,7 +290,7 @@ const SuperAdminDashboard = () => {
           />
         </Grid> */}
 
-        <Grid size={{ xs: 12, sm: 6, md: isSkitAdmin ? 3 : 3 }}>
+        <Grid item xs={12} sm={6} md={isSkitAdmin ? 3 : 3}>
           <StatCard
             title="Active Cases"
             value={stats?.openCases || 0}
@@ -300,7 +300,7 @@ const SuperAdminDashboard = () => {
           />
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: isSkitAdmin ? 3 : 3 }}>
+        <Grid item xs={12} sm={6} md={isSkitAdmin ? 3 : 3}>
           <StatCard
             title="Today's Hearings"
             value={stats?.todayHearings || 0}
@@ -314,7 +314,7 @@ const SuperAdminDashboard = () => {
       {/* Graphical Visualizations */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
         {/* Bar Chart: Key Platform Metrics */}
-        <Grid size={{ xs: 12, md: 7 }}>
+        <Grid item xs={12} md={7}>
           <Card sx={{ height: '380px' }}>
             <CardContent sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
               <Box sx={{ mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -333,7 +333,7 @@ const SuperAdminDashboard = () => {
         </Grid>
 
         {/* Doughnut Chart: Case Status Breakdown */}
-        <Grid size={{ xs: 12, md: 5 }}>
+        <Grid item xs={12} md={5}>
           <Card sx={{ height: '380px' }}>
             <CardContent sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
               <Box sx={{ mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -354,7 +354,7 @@ const SuperAdminDashboard = () => {
 
       {/* System Activity Logs (Tracks Login and Logout Times) */}
       <Grid container spacing={3}>
-        <Grid size={{ xs: 12 }}>
+        <Grid item xs={12}>
           <Card>
             <CardContent>
               {/* Header & Controls */}

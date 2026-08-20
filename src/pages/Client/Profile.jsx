@@ -284,7 +284,7 @@ const ClientProfile = () => {
             {/* TAB 0: Personal Details */}
             {activeTab === 0 && (
               <Grid container spacing={3}>
-                <Grid size={{ xs: 12, sm: 6 }}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     label="Full Client Name"
                     required
@@ -301,7 +301,7 @@ const ClientProfile = () => {
                   />
                 </Grid>
 
-                <Grid size={{ xs: 12, sm: 6 }}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     label="Registered Email Address"
                     type="email"
@@ -325,7 +325,7 @@ const ClientProfile = () => {
                   />
                 </Grid>
 
-                <Grid size={{ xs: 12, sm: 6 }}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     label="Date of Birth"
                     type="date"
@@ -336,7 +336,7 @@ const ClientProfile = () => {
                   />
                 </Grid>
 
-                <Grid size={{ xs: 12, sm: 6 }}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     select
                     label="Gender"
@@ -350,14 +350,14 @@ const ClientProfile = () => {
                   </TextField>
                 </Grid>
 
-                <Grid size={{ xs: 12 }}>
+                <Grid item xs={12}>
                   <Divider sx={{ my: 1 }} />
                   <Typography variant="subtitle2" color="secondary.main" sx={{ fontWeight: 800, mb: 2 }}>
                     NATIONAL IDENTIFICATION DETAILS (OPTIONAL)
                   </Typography>
                 </Grid>
 
-                <Grid size={{ xs: 12, sm: 6 }}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     label="Aadhaar Card ID Number"
                     fullWidth
@@ -375,7 +375,7 @@ const ClientProfile = () => {
                   />
                 </Grid>
 
-                <Grid size={{ xs: 12, sm: 6 }}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     label="PAN Card Number"
                     fullWidth
@@ -398,7 +398,7 @@ const ClientProfile = () => {
             {/* TAB 1: Contact & Address */}
             {activeTab === 1 && (
               <Grid container spacing={3}>
-                <Grid size={{ xs: 12, sm: 6 }}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     label="Primary Mobile Phone Number"
                     required
@@ -415,7 +415,7 @@ const ClientProfile = () => {
                   />
                 </Grid>
 
-                <Grid size={{ xs: 12, sm: 6 }}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     label="Alternate Mobile / Emergency Line"
                     fullWidth
@@ -431,7 +431,7 @@ const ClientProfile = () => {
                   />
                 </Grid>
 
-                <Grid size={{ xs: 12 }}>
+                <Grid item xs={12}>
                   <TextField
                     label="Residential / Corporate Office Address"
                     required
@@ -450,7 +450,7 @@ const ClientProfile = () => {
                   />
                 </Grid>
 
-                <Grid size={{ xs: 12, sm: 4 }}>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     label="City / District"
                     required
@@ -460,7 +460,7 @@ const ClientProfile = () => {
                   />
                 </Grid>
 
-                <Grid size={{ xs: 12, sm: 4 }}>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     label="State / Province"
                     required
@@ -470,7 +470,7 @@ const ClientProfile = () => {
                   />
                 </Grid>
 
-                <Grid size={{ xs: 12, sm: 4 }}>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     label="PIN / Postal Code"
                     required
@@ -493,7 +493,7 @@ const ClientProfile = () => {
                 </Alert>
 
                 <Grid container spacing={3}>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       label="New Password"
                       type={showPassword ? 'text' : 'password'}
@@ -518,7 +518,7 @@ const ClientProfile = () => {
                     />
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       label="Confirm New Password"
                       type={showPassword ? 'text' : 'password'}

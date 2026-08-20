@@ -103,7 +103,7 @@ const ClientCaseDetails = () => {
           {/* Tab 0: Case Overview */}
           {tabValue === 0 && (
             <Grid container spacing={3}>
-              <Grid size={{ xs: 12, md: 6 }}>
+              <Grid item xs={12} md={6}>
                 <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 600 }}>BASIC INFORMATION</Typography>
                 <Box sx={{ mt: 1.5, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                   <Typography variant="body2"><b>Filing Date:</b> {new Date(caseDetails.filingDate).toLocaleDateString()}</Typography>
@@ -115,7 +115,7 @@ const ClientCaseDetails = () => {
                 </Box>
               </Grid>
 
-              <Grid size={{ xs: 12, md: 6 }}>
+              <Grid item xs={12} md={6}>
                 <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 600 }}>COURT ROOM & BENCH</Typography>
                 <Box sx={{ mt: 1.5, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                   <Typography variant="body2"><b>Court Name:</b> {caseDetails.court?.courtName}</Typography>
@@ -124,11 +124,11 @@ const ClientCaseDetails = () => {
                 </Box>
               </Grid>
 
-              <Grid size={{ xs: 12 }}>
+              <Grid item xs={12}>
                 <Divider sx={{ my: 2 }} />
               </Grid>
 
-              <Grid size={{ xs: 12 }}>
+              <Grid item xs={12}>
                 <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 600 }}>MY REPRESENTATIVE ADVOCATES</Typography>
                 <Box sx={{ mt: 1.5, display: 'flex', flexDirection: 'column', gap: 1 }}>
                   <Typography variant="body2"><b>Lead Counsel:</b> {caseDetails.advocate?.fullName} (Practice: {caseDetails.advocate?.practiceArea?.name})</Typography>
@@ -144,14 +144,14 @@ const ClientCaseDetails = () => {
           {/* Tab 1: Opposing Counsel */}
           {tabValue === 1 && (
             <Grid container spacing={3}>
-              <Grid size={{ xs: 12, md: 6 }}>
+              <Grid item xs={12} md={6}>
                 <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 600 }}>RESPONDENT (OPPOSITE PARTY)</Typography>
                 <Box sx={{ mt: 1.5, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                   <Typography variant="body2"><b>Respondent Name:</b> {caseDetails.oppositePartyName}</Typography>
                 </Box>
               </Grid>
 
-              <Grid size={{ xs: 12, md: 6 }}>
+              <Grid item xs={12} md={6}>
                 <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 600 }}>OPPOSING COUNSEL</Typography>
                 <Box sx={{ mt: 1.5, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                   <Typography variant="body2"><b>Opposing Advocate:</b> {caseDetails.oppositeAdvocateName || '—'}</Typography>
@@ -221,7 +221,7 @@ const ClientCaseDetails = () => {
               ) : (
                 <Grid container spacing={2}>
                   {caseDetails.documents.map((doc) => (
-                    <Grid size={{ xs: 12, sm: 4, md: 4 }} key={doc.id}>
+                    <Grid item xs={12} sm={4} md={4} key={doc.id}>
                       <Card variant="outlined" sx={{ border: '1px solid rgba(255,255,255,0.05)' }}>
                         <CardContent sx={{ p: 2.5 }}>
                           <Chip label={doc.category} size="small" color="secondary" sx={{ mb: 1.5 }} />
@@ -279,7 +279,7 @@ const ClientCaseDetails = () => {
           {/* Tab 5: Observation Notes */}
           {tabValue === 5 && (
             <Grid container spacing={3}>
-              <Grid size={{ xs: 12, md: 6 }}>
+              <Grid item xs={12} md={6}>
                 <Card variant="outlined" sx={{ border: '1px solid rgba(255,255,255,0.05)' }}>
                   <CardContent>
                     <Typography variant="h6" color="secondary" sx={{ mb: 2, fontWeight: 700 }}>Advocate Shared Notes</Typography>
@@ -290,7 +290,7 @@ const ClientCaseDetails = () => {
                 </Card>
               </Grid>
 
-              <Grid size={{ xs: 12, md: 6 }}>
+              <Grid item xs={12} md={6}>
                 <Card variant="outlined" sx={{ border: '1px solid rgba(255,255,255,0.05)' }}>
                   <CardContent>
                     <Typography variant="h6" sx={{ mb: 2, fontWeight: 700 }}>Judgment Summary Copy / Remarks</Typography>

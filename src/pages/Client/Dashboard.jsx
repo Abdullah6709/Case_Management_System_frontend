@@ -195,7 +195,7 @@ const ClientDashboard = () => {
     <Box sx={{ py: 0.5 }}>
       {/* 1. Summary Metric Cards */}
       <Grid container spacing={2.5} sx={{ mb: 2.5 }}>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="My Active Cases"
             value={kpis.openCases ?? cases.length}
@@ -204,7 +204,7 @@ const ClientDashboard = () => {
           />
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="Scheduled Hearings"
             value={kpis.upcomingHearings ?? hearings.length}
@@ -213,7 +213,7 @@ const ClientDashboard = () => {
           />
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="Vault Documents"
             value={kpis.recentDocsCount || 0}
@@ -222,7 +222,7 @@ const ClientDashboard = () => {
           />
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="Assigned Counsel"
             value={assignedAdvocates.length || (cases.length > 0 && cases[0].advocate ? 1 : 0)}
