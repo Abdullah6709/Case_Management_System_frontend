@@ -77,7 +77,7 @@ const AdminDashboard = () => {
     <Box sx={{ py: 0.5 }}>
       {/* 1. Summary Metric Cards */}
       <Grid container spacing={2.5} sx={{ mb: 3 }}>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="Active Cases"
             value={kpis.openCases || 0}
@@ -86,7 +86,7 @@ const AdminDashboard = () => {
           />
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="Total Clients"
             value={kpis.totalClients || 0}
@@ -95,7 +95,7 @@ const AdminDashboard = () => {
           />
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="Today's Hearings"
             value={kpis.todayHearings || 0}
@@ -104,7 +104,7 @@ const AdminDashboard = () => {
           />
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="Advocates & Counsel"
             value={kpis.totalAdvocates || 0}
@@ -117,7 +117,7 @@ const AdminDashboard = () => {
       {/* 2. Main Two-Column Layout */}
       <Grid container spacing={3}>
         {/* Left: Upcoming Court Hearings */}
-        <Grid size={{ xs: 12, lg: 6 }}>
+        <Grid item xs={12} lg={6} >
           <Card
             elevation={0}
             sx={{
@@ -223,7 +223,7 @@ const AdminDashboard = () => {
         </Grid>
 
         {/* Right: Recent Cases */}
-        <Grid size={{ xs: 12, lg: 6 }}>
+        <Grid item xs={12} lg={6}>
           <Card
             elevation={0}
             sx={{

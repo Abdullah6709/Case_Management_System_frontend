@@ -13,62 +13,11 @@ import {
   InputAdornment,
   IconButton,
   Divider,
-  Grid,
-  Chip,
-  Tooltip,
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import ScaleIcon from '@mui/icons-material/Scale';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import BusinessIcon from '@mui/icons-material/Business';
-import PersonIcon from '@mui/icons-material/Person';
-import ApartmentIcon from '@mui/icons-material/Apartment';
-import FlashOnIcon from '@mui/icons-material/FlashOn';
 import { loginUser, clearError } from '../../store/slices/authSlice.js';
-
-const demoAccounts = [
-  {
-    role: 'Super Admin',
-    email: 'superadmin@lcms.com',
-    password: 'superadmin123',
-    badge: 'System Admin',
-    color: '#f59e0b',
-    icon: <AdminPanelSettingsIcon sx={{ color: '#f59e0b', fontSize: 18 }} />,
-  },
-  {
-    role: 'SKIT Admin',
-    email: 'skitadmin@lcms.com',
-    password: 'skitadmin123',
-    badge: 'Platform Admin',
-    color: '#38bdf8',
-    icon: <AdminPanelSettingsIcon sx={{ color: '#38bdf8', fontSize: 18 }} />,
-  },
-  {
-    role: 'Law Firm Admin',
-    email: 'clientadmin@nexuslegal.com',
-    password: 'clientadmin123',
-    badge: 'Nexus Legal',
-    color: '#3b82f6',
-    icon: <BusinessIcon sx={{ color: '#3b82f6', fontSize: 18 }} />,
-  },
-  {
-    role: 'Client User (John Doe)',
-    email: 'clientuser@nexuslegal.com',
-    password: 'clientuser123',
-    badge: 'Individual Client',
-    color: '#10b981',
-    icon: <PersonIcon sx={{ color: '#10b981', fontSize: 18 }} />,
-  },
-  {
-    role: 'Client User (Acme)',
-    email: 'legalclient2@example.com',
-    password: 'clientuser123',
-    badge: 'Corporate Client',
-    color: '#a855f7',
-    icon: <ApartmentIcon sx={{ color: '#a855f7', fontSize: 18 }} />,
-  },
-];
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -102,12 +51,6 @@ const Login = () => {
     dispatch(loginUser({ email: email.trim(), password }));
   };
 
-  const handleQuickDemo = (demoEmail, demoPassword) => {
-    setEmail(demoEmail);
-    setPassword(demoPassword);
-    dispatch(loginUser({ email: demoEmail, password: demoPassword }));
-  };
-
   return (
     <Box
       sx={{
@@ -120,7 +63,7 @@ const Login = () => {
         py: 4,
       }}
     >
-      <Card sx={{ width: '100%', maxWidth: 520, overflow: 'visible', position: 'relative' }}>
+      <Card sx={{ width: '100%', maxWidth: 480, overflow: 'visible', position: 'relative' }}>
         {/* Glow effect */}
         <Box
           sx={{
@@ -166,89 +109,6 @@ const Login = () => {
               {error}
             </Alert>
           )}
-
-          {/* Quick Demo Accounts Banner */}
-          <Box
-            sx={{
-              p: 2,
-              mb: 3,
-              borderRadius: 3,
-              backgroundColor: 'rgba(15, 23, 42, 0.6)',
-              border: '1px solid rgba(56, 189, 248, 0.2)',
-              boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.05)',
-            }}
-          >
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
-              <FlashOnIcon sx={{ color: '#f59e0b', fontSize: 20 }} />
-              <Typography variant="subtitle2" sx={{ fontWeight: 700, color: 'primary.main', letterSpacing: 0.5 }}>
-                1-Click Quick Demo Login Accounts
-              </Typography>
-            </Box>
-
-            <Grid container spacing={1}>
-              {demoAccounts.map((acc, index) => (
-                <Grid item xs={12} sm={index === 0 ? 12 : 6} key={acc.email}>
-                  <Tooltip title={`Click to auto login as ${acc.role} (${acc.email})`} arrow placement="top">
-                    <Button
-                      fullWidth
-                      variant="outlined"
-                      size="small"
-                      disabled={loading}
-                      onClick={() => handleQuickDemo(acc.email, acc.password)}
-                      sx={{
-                        justify: 'space-between',
-                        textAlign: 'left',
-                        px: 1.5,
-                        py: 1,
-                        borderRadius: 2,
-                        borderColor: 'rgba(255, 255, 255, 0.12)',
-                        backgroundColor: 'rgba(30, 41, 59, 0.4)',
-                        textTransform: 'none',
-                        transition: 'all 0.2s ease',
-                        '&:hover': {
-                          borderColor: acc.color,
-                          backgroundColor: `${acc.color}15`,
-                          transform: 'translateY(-1px)',
-                          boxShadow: `0 4px 12px ${acc.color}25`,
-                        },
-                      }}
-                    >
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, width: '100%', justifyContent: 'space-between' }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, minWidth: 0 }}>
-                          {acc.icon}
-                          <Box sx={{ minWidth: 0 }}>
-                            <Typography variant="caption" sx={{ fontWeight: 700, display: 'block', color: 'text.primary', lineHeight: 1.2 }}>
-                              {acc.role}
-                            </Typography>
-                            <Typography variant="caption" sx={{ color: 'text.secondary', fontSize: '0.7rem', display: 'block', noWrap: true }}>
-                              {acc.email}
-                            </Typography>
-                          </Box>
-                        </Box>
-                        <Chip
-                          label={acc.badge}
-                          size="small"
-                          sx={{
-                            height: 18,
-                            fontSize: '0.65rem',
-                            fontWeight: 700,
-                            backgroundColor: `${acc.color}20`,
-                            color: acc.color,
-                            border: `1px solid ${acc.color}40`,
-                            flexShrink: 0,
-                          }}
-                        />
-                      </Box>
-                    </Button>
-                  </Tooltip>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-
-          <Divider sx={{ mb: 3 }}>
-            <Typography variant="caption" color="text.secondary">Or sign in manually</Typography>
-          </Divider>
 
           <form onSubmit={handleSubmit}>
             <TextField

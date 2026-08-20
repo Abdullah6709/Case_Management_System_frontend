@@ -50,6 +50,7 @@ import ScaleIcon from '@mui/icons-material/Scale';
 import MapIcon from '@mui/icons-material/Map';
 import TopicIcon from '@mui/icons-material/Topic';
 import FolderSpecialIcon from '@mui/icons-material/FolderSpecial';
+import BadgeIcon from '@mui/icons-material/Badge';
 
 import { logoutUser } from '../../store/slices/authSlice.js';
 import { toggleTheme } from '../../store/slices/themeSlice.js';
@@ -209,12 +210,14 @@ const DashboardLayout = () => {
       case 'CLIENT_ADMIN':
         return [
           { text: 'Dashboard', icon: <DashboardIcon />, path: '/firm' },
+          { text: 'Advocates', icon: <BadgeIcon />, path: '/firm/advocates' },
           { text: 'Clients', icon: <PeopleIcon />, path: '/firm/clients' },
           { text: 'Cases', icon: <GavelIcon />, path: '/firm/cases' },
           { text: 'Hearings', icon: <EventIcon />, path: '/firm/hearings' },
           { text: 'Documents', icon: <DescriptionIcon />, path: '/firm/documents' },
           { text: 'Calendar', icon: <EventIcon />, path: '/firm/calendar' },
           { text: 'Reports', icon: <AssessmentIcon />, path: '/firm/reports' },
+          { text: 'Staff & Users', icon: <SupervisorAccountIcon />, path: '/firm/users' },
         ];
       case 'CLIENT_USER':
         return [

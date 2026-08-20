@@ -94,15 +94,23 @@ const Advocates = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!fullName || !enrollmentNumber || !mobile || !email || !practiceAreaId || !experience || !qualification || !address) {
-      setError('Please fill in all fields');
+    if (!fullName || !email) {
+      setError('Please fill in Full Name and Email Address');
       return;
     }
 
     try {
+      const targetPaId = practiceAreaId || (practiceAreas.length > 0 ? (practiceAreas[0].id || practiceAreas[0]._id) : null);
       const payload = {
-        fullName, enrollmentNumber, mobile, email,
-        practiceAreaId, experience, qualification, address, status,
+        fullName,
+        enrollmentNumber: enrollmentNumber || `BAR/${Date.now()}`,
+        mobile: mobile || '9876543210',
+        email,
+        practiceAreaId: targetPaId,
+        experience: experience !== '' ? Number(experience) : 0,
+        qualification: qualification || 'LL.B',
+        address: address || 'Chamber Address',
+        status,
       };
 
       if (editId) {
@@ -169,7 +177,6 @@ const Advocates = () => {
             size="small"
             startIcon={<AddIcon />}
             onClick={() => handleOpen()}
-            disabled={practiceAreas.length === 0}
             sx={{ height: 34, whiteSpace: 'nowrap' }}
           >
             Add Advocate

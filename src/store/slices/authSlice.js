@@ -19,13 +19,16 @@ export const registerUser = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await axios.post(`${API_URL}/register`, formData);
-      const { token, ...userData } = response.data;
+      const { token, message, ...userData } = response.data;
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(userData));
-      setAuthHeader(token);
-
-      return { token, user: userData };
+      if (token) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(userData));
+        setAuthHeader(token);
+        return { token, user: userData, pendingMessage: null };
+      } else {
+        return { token: null, user: userData, pendingMessage: message || 'Registration submitted! Awaiting administrator approval.' };
+      }
     } catch (error) {
       return rejectWithValue(
         error.response?.data?.message || 'Registration failed. Please try again.'
@@ -101,6 +104,7 @@ const initialState = {
   isAuthenticated: false,
   loading: true,
   error: null,
+  pendingMessage: null,
 };
 
 const authSlice = createSlice({
@@ -109,7 +113,10 @@ const authSlice = createSlice({
   reducers: {
     clearError: (state) => {
       state.error = null;
-    }
+    },
+    clearPendingMessage: (state) => {
+      state.pendingMessage = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -117,18 +124,28 @@ const authSlice = createSlice({
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.pendingMessage = null;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-        state.isAuthenticated = true;
         state.error = null;
+        if (action.payload.token) {
+          state.user = action.payload.user;
+          state.token = action.payload.token;
+          state.isAuthenticated = true;
+          state.pendingMessage = null;
+        } else {
+          state.user = null;
+          state.token = null;
+          state.isAuthenticated = false;
+          state.pendingMessage = action.payload.pendingMessage;
+        }
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
         state.isAuthenticated = false;
+        state.pendingMessage = null;
       })
       // Login
       .addCase(loginUser.pending, (state) => {
@@ -182,5 +199,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { clearError } = authSlice.actions;
+export const { clearError, clearPendingMessage } = authSlice.actions;
 export default authSlice.reducer;

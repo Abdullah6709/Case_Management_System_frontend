@@ -29,7 +29,7 @@ import { registerUser, clearError } from '../../store/slices/authSlice.js';
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated, loading, error, user } = useSelector((state) => state.auth);
+  const { isAuthenticated, loading, error, user, pendingMessage } = useSelector((state) => state.auth);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -46,8 +46,10 @@ const Register = () => {
     if (isAuthenticated && user) {
       if (user.role === 'SKIT_SUPER_ADMIN' || user.role === 'SKIT_ADMIN_USER') {
         navigate('/superadmin');
-      } else if (user.role === 'CLIENT_ADMIN' || user.role === 'CLIENT_USER') {
+      } else if (user.role === 'CLIENT_ADMIN') {
         navigate('/firm');
+      } else if (user.role === 'CLIENT_USER') {
+        navigate('/client');
       }
     }
   }, [isAuthenticated, user, navigate]);
@@ -144,6 +146,25 @@ const Register = () => {
               Select your role and register for LCMS Enterprise
             </Typography>
           </Box>
+
+          {pendingMessage && (
+            <Alert severity="warning" sx={{ mb: 3, borderRadius: 2 }}>
+              <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
+                Registration Request Submitted!
+              </Typography>
+              <Typography variant="body2">{pendingMessage}</Typography>
+              <Button
+                variant="outlined"
+                color="warning"
+                size="small"
+                component={RouterLink}
+                to="/login"
+                sx={{ mt: 1.5, fontWeight: 700 }}
+              >
+                Go to Sign In
+              </Button>
+            </Alert>
+          )}
 
           {(error || validationError) && (
             <Alert severity="error" sx={{ mb: 3 }}>
@@ -328,7 +349,7 @@ const Register = () => {
                 color="primary.main"
                 sx={{ textDecoration: 'none', fontWeight: 600, '&:hover': { textDecoration: 'underline' } }}
               >
-                Sign In here (Quick Demo Accounts Available)
+                Sign In here
               </Typography>
             </Typography>
           </Box>

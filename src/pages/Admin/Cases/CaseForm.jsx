@@ -219,8 +219,12 @@ const CaseForm = () => {
     e.preventDefault();
     setError('');
 
-    if (!caseNumber || !filingNumber || !caseTitle || !caseType || !caseCategory || !firstFilingDate || !startDate || !courtId || !judgeId || !advocateId) {
-      setError('Please fill in all mandatory fields (Case Number, Filing Number, Case Title, Dates, Court, Judge, Lead Advocate).');
+    const targetCourtId = courtId || (courts.length > 0 ? (courts[0]._id || courts[0].id) : null);
+    const targetJudgeId = judgeId || (filteredJudges.length > 0 ? (filteredJudges[0]._id || filteredJudges[0].id) : (judges.length > 0 ? (judges[0]._id || judges[0].id) : null));
+    const targetAdvocateId = advocateId || (advocates.length > 0 ? (advocates[0]._id || advocates[0].id) : null);
+
+    if (!caseNumber || !filingNumber || !caseTitle || !caseType) {
+      setError('Please fill in mandatory fields (Case Number, Filing Number, Case Title, and Case Type).');
       return;
     }
 
@@ -229,11 +233,11 @@ const CaseForm = () => {
       filingNumber,
       caseTitle,
       caseType,
-      caseCategory,
-      firstFilingDate,
-      filingDate: firstFilingDate,
-      startDate,
-      registrationDate: startDate,
+      caseCategory: caseCategory || caseType || 'General',
+      firstFilingDate: firstFilingDate || new Date().toISOString().split('T')[0],
+      filingDate: firstFilingDate || new Date().toISOString().split('T')[0],
+      startDate: startDate || new Date().toISOString().split('T')[0],
+      registrationDate: startDate || new Date().toISOString().split('T')[0],
       priority,
       status,
       clientId: clientId || null,
@@ -263,15 +267,15 @@ const CaseForm = () => {
       oppPartyRemark,
 
       // Selections & Advocates
-      advocateId,
+      advocateId: targetAdvocateId,
       juniorAdvocateId: juniorAdvocateId || null,
       oppositeAdvocateName,
       oppositeAdvocateEnrollment,
       oppositeAdvocateFirm,
       oppositeAdvocateMobile,
       oppositeAdvocateEmail,
-      courtId,
-      judgeId,
+      courtId: targetCourtId,
+      judgeId: targetJudgeId,
       internalNotes,
       publicNotes,
       remarks,
@@ -762,12 +766,20 @@ const CaseForm = () => {
                       fullWidth
                       value={advocateId}
                       onChange={(e) => setAdvocateId(e.target.value)}
+                      helperText={advocates.length === 0 ? "No advocates found. Please add advocates in Advocates section first." : ""}
+                      error={advocates.length === 0}
                     >
-                      {advocates.map((a) => (
-                        <MenuItem key={a._id || a.id} value={a._id || a.id}>
-                          {a.fullName} ({a.practiceArea?.name || 'Advocate'})
+                      {advocates.length === 0 ? (
+                        <MenuItem disabled value="">
+                          No advocates available in firm workspace
                         </MenuItem>
-                      ))}
+                      ) : (
+                        advocates.map((a) => (
+                          <MenuItem key={a._id || a.id} value={a._id || a.id}>
+                            {a.fullName} ({a.practiceArea?.name || 'Advocate'})
+                          </MenuItem>
+                        ))
+                      )}
                     </TextField>
                   </Grid>
                   <Grid size={{ xs: 12, sm: 6 }}>
